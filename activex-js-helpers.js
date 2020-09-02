@@ -76,6 +76,25 @@
     };
 
     ActiveXObject.set = function (obj, propertyName, parameters, newValue) {
+        /*@cc_on @*/
+        /*@
+        switch (parameters.length) {
+            case 0:
+                obj[propertyName] = newValue;
+                return;
+            case 1:
+                obj[propertyName](parameters[0]) = newValue;
+                return;
+            case 2:
+                obj[propertyName](parameters[0], parameters[1]) = newValue;
+                return;
+            case 3:
+                obj[propertyName](parameters[0], parameters[1], parameters[2]) = newValue;
+                return;
+            default:
+                break; // fallback to eval
+        }
+        @*/
         var parameterString = parameters.map(function (x, index) {
             return 'parameters[' + index + ']';
         }).join(', ');
