@@ -79,6 +79,7 @@
         var parameterString = parameters.map(function (x, index) {
             return 'parameters[' + index + ']';
         }).join(', ');
-        eval('obj[propertyName]' + '(' + parameterString + ') = newValue');
+        var callString = parameterString ? '(' + parameterString + ')' : "";
+        eval('obj[propertyName]' + callString + ' = newValue');
     };
 })();
