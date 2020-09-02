@@ -50,7 +50,7 @@ var startActiveXObjectSetTests = (function () {
 
         var objWith1Param = factory.CreateClassWithOneParamProp();
         ActiveXObject.set(objWith1Param, propertyName, ['b'], 'Beirut');
-        assertLog(objWith1Param[propertyName]('b') === 'Beiarut', 'One parameter');
+        assertLog(objWith1Param[propertyName]('b') === 'Beirut', 'One parameter');
 
         var objWith2Param = factory.CreateClassWithTwoParamProp();
         ActiveXObject.set(objWith2Param, propertyName, ['b', 'p'], 'Beirut, Paris');
