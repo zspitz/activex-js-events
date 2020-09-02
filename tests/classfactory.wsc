@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<component>
+	<?component error="true" debug="false"?>
+	<registration
+		description="AciteX JS Helpers Test Class Factory"
+		progid="ActiveXJSHelpers.TestClassFactory"
+		version="1.00"
+		classid="{a44dc85b-e1ed-4b34-9b50-a03a270618f0}"
+	>
+	</registration>
+	<public>
+		<method name="CreateClassWithZeroParamProp"/>
+		<method name="CreateClassWithOneParamProp"/>
+		<method name="CreateClassWithTwoParamProp"/>
+		<method name="CreateClassWithThreeParamProp"/>
+		<method name="CreateClassWithFourParamProp"/>
+	</public>
+	<script language="VBScript">
+<![CDATA[
+Option Explicit
+
+Function CreateKey(names)
+	If Not IsArray(names) Then
+		Err.Raise 13, "names must be an array"
+	End If
+	
+	ReDim keys(Ubound(names))
+	
+	Dim i
+	For i = 0 To UBound(names)
+		keys(i) = Join(Array(Len(names(i)), names(i)), "=")
+	Next
+	
+	CreateKey = Join(keys, ";")
+End Function
+
+Function GetDictionaryValue(dic, names)
+	Dim key
+	key = CreateKey(names)
+	
+	GetDictionaryValue = dic(key)
+End Function
+
+Function SetDictionaryValue(dic, names, value)
+	If IsObject(value) Then
+		Err.Raise 13, "Object handling not implemented"
+	End If
+	
+	Dim key
+	key = CreateKey(names)
+	
+	dic(key) = value
+End Function
+
+Function CreateClassWithZeroParamProp()
+	Set CreateClassWithZeroParamProp = New ClassWithZeroParamProp
+End Function
+
+Function CreateClassWithOneParamProp()
+	Set CreateClassWithOneParamProp = New ClassWithOneParamProp
+End Function
+
+Function CreateClassWithTwoParamProp()
+	Set CreateClassWithTwoParamProp = New ClassWithTwoParamProp
+End Function
+
+Function CreateClassWithThreeParamProp()
+	Set CreateClassWithThreeParamProp = New ClassWithThreeParamProp
+End Function
+
+Function CreateClassWithFourParamProp()
+	Set CreateClassWithFourParamProp = New ClassWithFourParamProp
+End Function
+
+Class ClassWithZeroParamProp
+	Private  item_
+	
+	Public Property Get Item()
+		Item = item_
+	End Property
+	
+	Public Property Let Item(value)
+		item_ = value
+	End Property
+End Class
+
+Class ClassWithOneParamProp
+	Private dic
+	
+	Private Sub Class_Initialize
+		Set dic = CreateObject("Scripting.Dictionary")
+	End Sub
+	
+	Public Property Get Item(name)
+		Item = GetDictionaryValue(dic, Array(name))
+	End Property
+	
+	Public Property Let Item(name, value)
+		SetDictionaryValue dic, Array(name), value
+	End Property
+End Class
+
+Class ClassWithTwoParamProp
+	Private dic
+	
+	Private Sub Class_Initialize
+		Set dic = CreateObject("Scripting.Dictionary")
+	End Sub
+	
+	Public Property Get Item(name1, name2)
+		Item = GetDictionaryValue(dic, Array(name1, name2))
+	End Property
+	
+	Public Property Let Item(name1, name2, value)
+		SetDictionaryValue dic, Array(name1, name2), value
+	End Property
+End Class
+
+Class ClassWithThreeParamProp
+	Private dic
+	
+	Private Sub Class_Initialize
+		Set dic = CreateObject("Scripting.Dictionary")
+	End Sub
+	
+	Public Property Get Item(name1, name2, name3)
+		Item = GetDictionaryValue(dic, Array(name1, name2, name3))
+	End Property
+	
+	Public Property Let Item(name1, name2, name3, value)
+		SetDictionaryValue dic, Array(name1, name2, name3), value
+	End Property
+End Class
+
+Class ClassWithFourParamProp
+	Private dic
+	
+	Private Sub Class_Initialize
+		Set dic = CreateObject("Scripting.Dictionary")
+	End Sub
+	
+	Public Property Get Item(name1, name2, name3, name4)
+		Item = GetDictionaryValue(dic, Array(name1, name2, name3, name4))
+	End Property
+	
+	Public Property Let Item(name1, name2, name3, name4, value)
+		SetDictionaryValue dic, Array(name1, name2, name3, name4), value
+	End Property
+End Class
+]]>
+	</script>
+</component>

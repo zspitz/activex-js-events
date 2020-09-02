@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<job>
+	<script language="JScript" src="..\shims.js"/>
+	<script language="JScript" src="..\activex-js-helpers.js"/>
+	<script language="JScript" src="testsuite.js"/>
+	<script language="JScript">
+	<![CDATA[
+		var fso = new ActiveXObject('Scripting.FileSystemObject');
+		if(fso.GetFileName(WScript.FullName).toLowerCase() !== 'cscript.exe'){
+			var wshShell = new ActiveXObject('WScript.Shell');
+			wshShell.Run('cscript //I //NoLogo "' + WScript.ScriptFullName + '"');
+			WScript.Quit();
+		}
+		startActiveXObjectSetTests();
+		WScript.Echo('Press any key to exit');
+		WScript.StdIn.Read(1);
+	]]>
+	</script>
+</job>
