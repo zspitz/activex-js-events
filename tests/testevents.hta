@@ -5,6 +5,7 @@
     <script src="./firebug/firebug-lite-modified.js"></script>
     <script src="jquery-1.12.4.js"></script>
     <script src="..\activex-js-helpers.js"></script>
+    <script src="testsuite.js"></script>
     <script>
         $(function () {
             $('#btnWord').click(function () {
@@ -29,9 +30,8 @@
             });
 
             $('#btnPropertySetter').click(function () {
-                var dict = new ActiveXObject('Scripting.Dictionary');
-                ActiveXObject.set(dict, 'Item', ['b'], 'Beirut');
-                console.log(dict.Item('b'));
+                console.log('Test started');
+                setTimeout(startActiveXObjectSetTests, 100);
             });
         });
     </script>
